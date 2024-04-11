@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Desafio Colisão</title>
+</head>
+
+<body>
+    <div id="config">
+        <div>
+            Coordenada de borda X0 do retangulo 1:
+            <input type="number" id="inputretangulo1X0"><br>
+            Coordenada de borda Y0 do retangulo 1:
+            <input type="number" id="inputretangulo1Y0"><br>
+            Coordenada de borda X1 do retangulo 1:
+            <input type="number" id="inputretangulo1X1"><br>
+            Coordenada de borda Y1 do retangulo 1:
+            <input type="number" id="inputretangulo1Y1"><br>
+        </div>
+        <button onclick="calcularColisao()">Calcule Colisão</button>
+        <div>
+            Coordenada de borda X0 do retangulo 2:
+            <input type="number" id="inputretangulo2X0"><br>
+            Coordenada de borda Y0 do retangulo 2:
+            <input type="number" id="inputretangulo2Y0"><br>
+            Coordenada de borda X1 do retangulo 2:
+            <input type="number" id="inputretangulo2X1"><br>
+            Coordenada de borda Y1 do retangulo 2:
+            <input type="number" id="inputretangulo2Y1"><br>
+        </div>
+    </div>
+    <hr>
+    <div id="planoCarteziano">
+        
+        <div id="linhaY"></div>
+        <div id="eixoX">
+            <div class="eixoXBlock"></div>
+            <div class="eixoXBlock"></div>
+            <div class="eixoXBlock"></div>
+            <div class="eixoXBlock"></div>
+            <div class="eixoXBlock"></div>
+            <div class="eixoXBlock"></div>
+            <div class="eixoXBlock"></div>
+            <div class="eixoXBlock"></div>
+            <div class="eixoXBlock"></div>
+            <div class="eixoXBlock"></div>
+            <div class="eixoXBlock"></div>
+            <div class="eixoXBlock"></div>
+            <div class="eixoXBlock"></div>
+            <div class="eixoXBlock"></div>
+            <div class="eixoXBlock"></div>
+            <div class="eixoXBlock"></div>
+            <div class="eixoXBlock"></div>
+            <div class="eixoXBlock"></div>
+            <div class="eixoXBlock"></div>
+            <div class="eixoXBlock"></div>
+        </div>
+        <div id="caixa1" style="position: absolute;border: 1px solid red;"></div>
+        <div id="caixa2" style="position: absolute;border: 1px solid blue;"></div>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    function calcularColisao() {
+        let retan1X0 = Number(inputretangulo1X0.value)
+        let retan1X1 = Number(inputretangulo1X1.value)
+        let retan1Y0 = Number(inputretangulo1Y0.value)
+        let retan1Y1 = Number(inputretangulo1Y1.value)
+        let retan2X0 = Number(inputretangulo2X0.value)
+        let retan2X1 = Number(inputretangulo2X1.value)
+        let retan2Y0 = Number(inputretangulo2Y0.value)
+        let retan2Y1 = Number(inputretangulo2Y1.value)
+
+        let intersecssaoX = 0
+        let intersecssaoY = 0
+
+        if (retan2X1 >= retan1X0) {
+            if (retan2X0 <= retan1X1) {
+                if (retan2Y1 >= retan1Y0) {
+                    if (retan2Y0 <= retan1Y1) {
+                        intersecssaoY = 1
+                    }
+                }
+            }
+        }
+        if (intersecssaoY == 1) {
+            // mostrarResposta.innerHTML = "Colidiu"
+        }
+        else {
+            // mostrarResposta.innerHTML = "Não Colidiu"
+        }
+
+        caixa1.style.width= `${(retan1X1-retan1X0)*68.3}px`
+        caixa1.style.height= `${(retan1Y1-retan1Y0)*70}px`
+
+        caixa2.style.width= `${(retan2X1-retan2X0)*68.3}px`
+        caixa2.style.height= `${(retan2Y1-retan2Y0)*70}px`
+
+        
+        caixa1.style.left= `calc(calc(100% - 683px) + ${68.3*retan1X0}px)`
+        caixa1.style.bottom= `calc(calc(100% - 280px) + ${70*retan1Y0}px)`
+
+        caixa2.style.left= `calc(calc(100% - 683px) + ${68.3*retan2X0}px)`
+        caixa2.style.bottom= `calc(calc(100% - 280px) + ${70*retan2Y0}px)`
+    }
+</script>
